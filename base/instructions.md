@@ -18,7 +18,7 @@
 | 0xc   | Ror       |
 | 0xd   | Not       |
 | 0xe   | Neg       |
-| 0xf   | Reserved  |
+| 0xf   | Cmp       |
 
 1. Requires integer multiplication extension
 
@@ -32,7 +32,7 @@
 | 0x4   | Ge        |
 | 0x5   | Lt        |
 | 0x6   | Le        |
-| 0x7   | Reserved  |
+| 0x7   | Never     |
 
 ### d, r, q - Registers
 Registers, d is Rd, R is Rs, and q is Rq
