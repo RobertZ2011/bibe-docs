@@ -60,7 +60,7 @@ If op is unary reg[d] = op (reg[r] + (reg[q] shift sssssssss))
 | Rest  | Reserved  |
 Load/store byte/short/word to/from memory address (reg[r] << k) + i and register reg[d]
 
-## State Related
+## Model specific
 00 10 mmmm rrrrr uuuuuuuuuuuuuuuuuuuu
 | Value | Operation |
 | ----- | --------- |
