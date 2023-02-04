@@ -18,7 +18,7 @@
 | 0xc   | Ror       |
 | 0xd   | Not       |
 | 0xe   | Neg       |
-| 0xf   | Sxt       |
+| 0xf   | Reserved  |
 
 1. Requires integer multiplication extension
 
@@ -42,7 +42,7 @@ Registers, d is Rd, R is Rs, and q is Rq
 ### s - Bit shift
 
 ## RRR
-00 00 oooo ddddd rrrrr qqqqq sssssssss
+00 00 oooo ddddd rrrrr qqqqq ttt ssssss
 
 Perform reg[d] = reg[r] op (reg[q] shift sssssssss)
 If op is unary reg[d] = op (reg[r] + (reg[q] shift sssssssss))
