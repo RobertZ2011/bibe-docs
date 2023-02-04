@@ -7,18 +7,19 @@
 | 0x1   | Sub       |
 | 0x2   | Mul^1     |
 | 0x3   | Div^1     |
-| 0x4   | And       |
-| 0x5   | Or        |
-| 0x6   | Xor       |
-| 0x7   | Shl       |
-| 0x8   | Shr       |
-| 0x9   | Asl       |
-| 0xa   | Asr       |
-| 0xb   | Rol       |
-| 0xc   | Ror       |
-| 0xd   | Not       |
-| 0xe   | Neg       |
-| 0xf   | Cmp       |
+| 0x4   | Mod^1
+| 0x5   | And       |
+| 0x6   | Or        |
+| 0x7   | Xor       |
+| 0x8   | Shl       |
+| 0x9   | Shr       |
+| 0xa   | Asl       |
+| 0xb   | Asr       |
+| 0xc   | Rol       |
+| 0xd   | Ror       |
+| 0xe   | Not       |
+| 0xf   | Neg       |
+| 0x10  | Cmp       |
 
 1. Requires integer multiplication extension
 
@@ -42,13 +43,13 @@ Registers, d is Rd, R is Rs, and q is Rq
 ### s - Bit shift
 
 ## RRR
-00 00 oooo ddddd rrrrr qqqqq ttt ssssss
+00 00 ooooo ddddd rrrrr qqqqq ttt sssss
 
-Perform reg[d] = reg[r] op (reg[q] shift sssssssss)
-If op is unary reg[d] = op (reg[r] + (reg[q] shift sssssssss))
+Perform reg[d] = reg[r] op (reg[q] shift s)
+If op is unary reg[d] = op (reg[r] + (reg[q] shift s))
 
 ## Memory
-00 01 mmmm ddddd rrrrr kkk iiiiiiiiiii
+00 01 mmmmm ddddd rrrrr kkk iiiiiiiiii
 | Value | Operation |
 | ----- | --------- |
 | 0x0   | ldrb      |
@@ -61,7 +62,7 @@ If op is unary reg[d] = op (reg[r] + (reg[q] shift sssssssss))
 Load/store byte/short/word to/from memory address (reg[r] << k) + i and register reg[d]
 
 ## Model specific
-00 10 mmmm rrrrr uuuuuuuuuuuuuuuuuuuu
+00 10 mmmmm rrrrr uuuuuuuuuuuuuuuuuuu
 | Value | Operation |
 | ----- | --------- |
 | 0x0   | rms       |
@@ -69,10 +70,10 @@ Load/store byte/short/word to/from memory address (reg[r] << k) + i and register
 | Rest  | Reserved  |
 
 ## RRI
-01 oooo ddddd rrrrr ccc iiiiiiiiiiiii
+01 ooooo ddddd rrrrr ccc iiiiiiiiiiii
 
-Conditionally perform reg[d] = reg[r] op iiiiiiiiiiiii
-If op is unary reg[d] = op (reg[r] + iiiiiiiiiiiii)
+Conditionally perform reg[d] = reg[r] op i
+If op is unary reg[d] = op (reg[r] + i)
 
 ## Implemntation defined
-11 0xxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+11 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
