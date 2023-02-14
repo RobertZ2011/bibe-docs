@@ -52,14 +52,46 @@ If op is unary reg[d] = op (reg[r] + (reg[q] shift s))
 00 01 mmmmm ddddd rrrrr kkk iiiiiiiiii
 | Value | Operation |
 | ----- | --------- |
-| 0x0   | ldrb      |
-| 0x1   | strb      |
-| 0x2   | ldrs      |
-| 0x3   | strs      |
-| 0x4   | ldrw      |
-| 0x5   | strw      |
-| Rest  | Reserved  |
-Load/store byte/short/word to/from memory address (reg[r] << k) + i and register reg[d]
+| 0x0   | ldrb.rr   |
+| 0x1   | strb.rr   |
+| 0x2   | ldrs.rr   |
+| 0x3   | strs.rr   |
+| 0x4   | ldrw.rr   |
+| 0x5   | strw.rr   |
+| 0x6   | Reserved  |
+| 0x7   | Reserved  |
+| 0x8   | Reserved  |
+| 0x9   | Reserved  |
+| 0xa   | Reserved  |
+| 0xb   | Reserved  |
+| 0xc   | Reserved  |
+| 0xd   | Reserved  |
+| 0xe   | Reserved  |
+| 0xf   | Reserved  |
+| 0x10  | ldrb.ri   |
+| 0x11  | strb.ri   |
+| 0x12  | ldrs.ri   |
+| 0x13  | strs.ri   |
+| 0x14  | ldrw.ri   |
+| 0x15  | strw.ri   |
+| 0x16  | Reserved  |
+| 0x17  | Reserved  |
+| 0x18  | Reserved  |
+| 0x19  | Reserved  |
+| 0x1a  | Reserved  |
+| 0x1b  | Reserved  |
+| 0x1c  | Reserved  |
+| 0x1d  | Reserved  |
+| 0x1e  | Reserved  |
+| 0x1f  | Reserved  |
+
+### RR
+00 01 mmmmm 0000 ddddd rrrrr qqqqq ssss
+Memory operation involving the address reg[r] + (reg[q] << s)
+
+## RI
+00 01 mmmmm ddddd rrrrr iiiiiiiiiiiii
+Memory operation involving the address reg[r] + i
 
 ## Model specific
 00 10 mmmmm rrrrr uuuuuuuuuuuuuuuuuuu
