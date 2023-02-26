@@ -94,12 +94,18 @@ Memory operation involving the address reg[r] + (reg[q] << s)
 Memory operation involving the address reg[r] + i
 
 ## Model specific
-00 10 mmmmm rrrrr uuuuuuuuuuuuuuuuuuu
+00 10 mmmmm rrrrr uuu uuuu uuuu uuuu uuuu
 | Value | Operation |
 | ----- | --------- |
 | 0x0   | rms       |
-| 0x1   | wms       |
-| Rest  | Reserved  |
+| 0x10  | wms       |
+
+rms reads the model-specific register named by the immediate u into the register r
+wms writes the value of the register r into the model-spcific register named by the immediate u
+
+The immediate space is divided as follows:
+0x00000-0x3ffff: Reserved
+0x40000-0x7ffff: Implementation defined
 
 ## RRI
 01 ooooo ddddd rrrrr ccc iiiiiiiiiiii
