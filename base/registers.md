@@ -21,7 +21,7 @@ The processor status register contains flags and values on the
 current execution state of the processor. This is an architectural
 register that must be implemented.
 
-xxxx xxxx xxxx xxxx xxxx xxxx xxxx mmcc
+xxxx xxxx xxxx xxxx xxxx xxxx xxee mmcc
 
 x - Reserved
 
@@ -48,3 +48,15 @@ flag as their only effect.
 
 #### m[1]: Error flag
 When set indicates that an msr instruction attempted to access an invalid register
+
+### ee - Exception control and status flags
+These bits contain control and status information for
+exception handling.
+
+#### e[0]: In exception mode flag
+RO
+This bit is set while handling an exception
+
+#### e[1]: IRQ disable flag
+RW
+When this bit is set the processor does not respond to IRQs
