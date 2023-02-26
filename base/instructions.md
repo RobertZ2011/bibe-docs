@@ -86,7 +86,7 @@ If op is unary reg[d] = op (reg[r] + (reg[q] shift s))
 | 0x1f  | Reserved  |
 
 ### RR
-00 01 mmmmm 0000 ddddd rrrrr qqqqq ssss
+00 01 mmmmm ddddd rrrrr qqqqq ssss 0000
 Memory operation involving the address reg[r] + (reg[q] << s)
 
 ## RI
