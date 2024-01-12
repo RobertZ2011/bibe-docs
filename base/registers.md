@@ -49,7 +49,7 @@ flag as their only effect.
 #### m[1]: Error flag
 When set indicates that an msr instruction attempted to access an invalid register
 
-### ee - Exception control and status flags
+### ee - Interrupt control and status flags
 These bits contain control and status information for
 exception handling.
 
