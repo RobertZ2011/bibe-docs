@@ -40,13 +40,15 @@ Registers, d is Rd, R is Rs, and q is Rq
 
 ### m - instruction specific operation
 
-### s - Bit shift
+### s - Bit shift amount
+
+### t - Bit shift type
 
 ## RRR
 00 00 ooooo ddddd rrrrr qqqqq ttt sssss
 
-Perform reg[d] = reg[r] op (reg[q] shift s)
-If op is unary reg[d] = op (reg[r] + (reg[q] shift s))
+Perform reg[d] = reg[r] op (reg[q] shift(t) s)
+If op is unary reg[d] = op (reg[r] + reg[q] shift(t) s)
 
 ## Memory
 00 01 mmmmm ddddd rrrrr kkk iiiiiiiiii
@@ -58,60 +60,52 @@ If op is unary reg[d] = op (reg[r] + (reg[q] shift s))
 | 0x3   | strs.rr   |
 | 0x4   | ldrw.rr   |
 | 0x5   | strw.rr   |
-| 0x6   | Reserved  |
-| 0x7   | Reserved  |
-| 0x8   | Reserved  |
-| 0x9   | Reserved  |
-| 0xa   | Reserved  |
-| 0xb   | Reserved  |
-| 0xc   | Reserved  |
-| 0xd   | Reserved  |
-| 0xe   | Reserved  |
-| 0xf   | Reserved  |
+
 | 0x10  | ldrb.ri   |
 | 0x11  | strb.ri   |
 | 0x12  | ldrs.ri   |
 | 0x13  | strs.ri   |
 | 0x14  | ldrw.ri   |
 | 0x15  | strw.ri   |
-| 0x16  | Reserved  |
-| 0x17  | Reserved  |
-| 0x18  | Reserved  |
-| 0x19  | Reserved  |
-| 0x1a  | Reserved  |
-| 0x1b  | Reserved  |
-| 0x1c  | Reserved  |
-| 0x1d  | Reserved  |
-| 0x1e  | Reserved  |
-| 0x1f  | Reserved  |
 
 ### RR
-00 01 mmmmm ddddd rrrrr qqqqq ssss 0000
-Memory operation involving the address reg[r] + (reg[q] << s)
+00 01 mmmmm ddddd rrrrr qqqqq ttt sssss
+Memory operation involving the address reg[r] + (reg[q] shift(t) s)
 
 ## RI
 00 01 mmmmm ddddd rrrrr iiiiiiiiiiiii
 Memory operation involving the address reg[r] + i
 
-## Model specific
+## CSR
 00 10 mmmmm rrrrr uuu uuuu uuuu uuuu uuuu
 | Value | Operation |
 | ----- | --------- |
-| 0x0   | rms       |
-| 0x10  | wms       |
+| 0x0   | csrb      |
+| 0x1   | csrs      |
+| 0x2   | csrw      |
 
-rms reads the model-specific register named by the immediate u into the register r
-wms writes the value of the register r into the model-spcific register named by the immediate u
+| 0x10  | cswb      |
+| 0x11  | csws      |
+| 0x12  | csww      |
+
+csrr reads the model-specific register named by the immediate u into the register r
+csrw writes the value of the register r into the model-spcific register named by the immediate u
 
 The immediate space is divided as follows:
 0x00000-0x3ffff: Reserved
 0x40000-0x7ffff: Implementation defined
+
+Reserved0011
+0011 xxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
 ## RRI
 01 ooooo ddddd rrrrr ccc iiiiiiiiiiii
 
 Conditionally perform reg[d] = reg[r] op i
 If op is unary reg[d] = op (reg[r] + i)
+
+## Reserved10
+10 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
 ## Implemntation defined
 11 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
