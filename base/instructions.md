@@ -7,7 +7,7 @@
 | 0x1   | Sub       |
 | 0x2   | Mul^1     |
 | 0x3   | Div^1     |
-| 0x4   | Mod^1
+| 0x4   | Mod^1     |
 | 0x5   | And       |
 | 0x6   | Or        |
 | 0x7   | Xor       |
@@ -19,21 +19,22 @@
 | 0xd   | Ror       |
 | 0xe   | Not       |
 | 0xf   | Neg       |
-| 0x10  | Cmp       |
+| 0x10  | Addcc     |
+| 0x11  | Subcc     |
 
 1. Requires integer multiplication extension
 
 ### c - Condition
-| Value | Condition |
-| ----- | --------- |
-| 0x0   | Always    |
-| 0x1   | Eq        |
-| 0x2   | Ne        |
-| 0x3   | Gt        |
-| 0x4   | Ge        |
-| 0x5   | Lt        |
-| 0x6   | Le        |
-| 0x7   | Never     |
+| Value | Condition    |
+| ----- | ---------    |
+| 0x0   | Always       |
+| 0x1   | Overflow     |
+| 0x2   | Carry        |
+| 0x3   | Zero(Eq)     |
+| 0x4   | Negative(Lt) |
+| 0x5   | !Z(Ne)       |
+| 0x6   | !N(Ge)       |
+| 0x7   | !(N || Z)(Gt)|
 
 ### d, r, q - Registers
 Registers, d is Rd, R is Rs, and q is Rq
@@ -51,7 +52,6 @@ Perform reg[d] = reg[r] op (reg[q] shift(t) s)
 If op is unary reg[d] = op (reg[r] + reg[q] shift(t) s)
 
 ## Memory
-00 01 mmmmm ddddd rrrrr kkk iiiiiiiiii
 | Value | Operation |
 | ----- | --------- |
 | 0x0   | ldrb.rr   |

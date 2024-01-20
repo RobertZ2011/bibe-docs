@@ -25,35 +25,26 @@ xxxx xxxx xxxx xxxx xxxx xxxx xxee mmcc
 
 x - Reserved
 
-### c - Last `cmp` result
+## Arithemetic flags
+These bits are only set by cc instructions.
+
+### V - Overflow flag
 RO
-These bits store the result of the last `cmp` instruction
 
-| Value | Result |
-| ----- | -------|
-| 0x0   | Equal  |
-| 0x1   | Lt     |
-| 0x2   | Gt     |
-| 0x3   | Res    |
+### C - Carry flag
+RO
 
-### m - Model control and status flags
-RW
-These bits contain control and status information for msr
-instructions.
+### Z - Zero flag
+RO
 
-#### m[0]: Quiet flag
-When set this bit causes msr instructions that operate on an invalid
-register index to not trigger and exception. The instructions set the error
-flag as their only effect.
-
-#### m[1]: Error flag
-When set indicates that an msr instruction attempted to access an invalid register
+### P - Positive flag
+RO
 
 ### ee - Interrupt control and status flags
 These bits contain control and status information for
-exception handling.
+interrupt handling.
 
-#### e[0]: In exception mode flag
+#### e[0]: In interrupt mode flag
 RO
 This bit is set while handling an exception
 
