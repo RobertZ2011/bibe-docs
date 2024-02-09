@@ -52,7 +52,7 @@ from before the double fault. A subsequent fault before exiting interrupt mode
 results in a reset.
 
 ### Software Interrupt (SWI)
-Triggered by writing to csr[ISR_SWI] or the alias instruction `swi`
+Triggered by writing to csr[ISR_ENTER] or the alias instruction `swi`
 
 ### Reserved 0-7
 
@@ -72,7 +72,7 @@ ISR_BASE
 R/O/I
 
 ISR_ENTER
-R/W/0 - Writing a one to any bit will trigger a software interrupt
+R/W/0 - Writing any value to this register will trigger a software interrupt
 
 ISR_EXIT
 R/W/0 - Writing a one to any bit will exit interrupt mode

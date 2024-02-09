@@ -1,6 +1,6 @@
 # Types
 
-### o - Operation
+### o - Integer Operation
 | Value | Operation |
 | ----- | --------- |
 | 0x0   | Add       |
@@ -36,14 +36,32 @@
 | 0x6   | !N(Ge)       |
 | 0x7   | !(N || Z)(Gt)|
 
+### l - Load Store
+| Value | Operation  |
+| ----- | ---------- |
+| 0x0   | Load B     |
+| 0x1   | Load S     |
+| 0x2   | Load W     |
+
+| 0x4   | Store B    |
+| 0x5   | Store S    |
+| 0x6   | Store W    |
+
 ### d, r, q - Registers
 Registers, d is Rd, R is Rs, and q is Rq
 
-### m - instruction specific operation
+### t - Bit shift type
+| Value  | Operation |
+| -----  | --------- |
+| 0x0    | Shl       |
+| 0x1    | Shr       |
+| 0x2    | Asl       |
+| 0x3    | Asr       |
+| 0x4    | Rol       |
+| 0x5    | Ror       |
 
 ### s - Bit shift amount
-
-### t - Bit shift type
+Unsigned
 
 ## RRR
 00 00 ooooo ddddd rrrrr qqqqq ttt sssss
@@ -51,51 +69,22 @@ Registers, d is Rd, R is Rs, and q is Rq
 Perform reg[d] = reg[r] op (reg[q] shift(t) s)
 If op is unary reg[d] = op (reg[r] + reg[q] shift(t) s)
 
-## Memory
-| Value | Operation |
-| ----- | --------- |
-| 0x0   | ldrb.rr   |
-| 0x1   | strb.rr   |
-| 0x2   | ldrs.rr   |
-| 0x3   | strs.rr   |
-| 0x4   | ldrw.rr   |
-| 0x5   | strw.rr   |
-
-| 0x10  | ldrb.ri   |
-| 0x11  | strb.ri   |
-| 0x12  | ldrs.ri   |
-| 0x13  | strs.ri   |
-| 0x14  | ldrw.ri   |
-| 0x15  | strw.ri   |
-
-### RR
-00 01 mmmmm ddddd rrrrr qqqqq ttt sssss
+## Memory RR
+00 01 0 llll ddddd rrrrr qqqqq ttt sssss
 Memory operation involving the address reg[r] + (reg[q] shift(t) s)
 
-## RI
-00 01 mmmmm ddddd rrrrr iiiiiiiiiiiii
-Memory operation involving the address reg[r] + i
-
 ## CSR
-00 10 mmmmm rrrrr uuu uuuu uuuu uuuu uuuu
-| Value | Operation |
-| ----- | --------- |
-| 0x0   | csrb      |
-| 0x1   | csrs      |
-| 0x2   | csrw      |
-
-| 0x10  | cswb      |
-| 0x11  | csws      |
-| 0x12  | csww      |
-
-csrr reads the model-specific register named by the immediate u into the register r
-csrw writes the value of the register r into the model-spcific register named by the immediate u
+00 01 1 llll rrrrr uuu uuuu uuuu uuuu uuuu
+Read/Write the CSR named by u
 
 The immediate space is divided as follows:
 0x00000-0x3ffff: Reserved
 0x40000-0x7ffff: Implementation defined
 
-Reserved0011
+## Reserved0010
+0010 xxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+## Reserved0011
 0011 xxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
 ## RRI
@@ -104,8 +93,10 @@ Reserved0011
 Conditionally perform reg[d] = reg[r] op i
 If op is unary reg[d] = op (reg[r] + i)
 
-## Reserved10
-10 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+## Memory RI
+10 llll ddddd rrrrr iiiiiiiiiiiiiiii
+Memory operation involving the address reg[r] + i
 
-## Implemntation defined
-11 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+## Jump
+11 ii iiii iiii iiii iiii iiii iiii iiii iiii
+Perform pc = pc + i
